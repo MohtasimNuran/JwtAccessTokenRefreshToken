@@ -6,7 +6,24 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Version>4.0.0</Version>
+    <Title>JWT.Module</Title>
+    <Description>The package provides various functionalities for JWT-based authentication and authorization, including token generation, refresh token handling, and database integration.</Description>
+    <PackageIcon>Untitled design.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/MohtasimNuran/JwtAccessTokenRefreshToken</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="C:\Users\mnuran\Downloads\Untitled design.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.28" />
