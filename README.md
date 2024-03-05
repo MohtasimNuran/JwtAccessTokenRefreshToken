@@ -14,20 +14,68 @@ This repository contains a NuGet package for managing JSON Web Tokens (JWT) with
 ```json
 {
   "JWT": {
-    "ValidAudience": "http://nuran.com",
-    "ValidIssuer": "http://nuran.com",
+    "ValidAudience": "http://yoursite.com",
+    "ValidIssuer": "http://yoursite.com",
     "Secret": "JWTRefreshTokenHIGHsecuredPasswordVVVp1OH7Xzyr",
     "TokenValidityInMinutes": 5,
     "RefreshTokenValidityInDays": 7,
-    "ConnectionString": "Server=DESKTOP-T9S3VKL;Database=TestDB;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True;",
-    "UserTableName": "AuthUser",
-    "UserTablePrimaryKey": "Id",
-    "UserTableUniqueName": "UniqueName",
-    "JwtTableName": "TokenStorage",
-    "RegisterRoute": "auth/register",
-    "LoginRoute": "auth/login",
-    "LogoutRoute": "auth/logout",
-    "TokenRoute": "auth/GetTokenByRefreshToken",
-    "UpdatePasswordRoute": "auth/UpdatePassword"
+    "ConnectionString": "Server=<server_name>;Database=<db_name>;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True;",
+    "UserTableName": "AuthUser_Table", ///Table, you are already using to save user data like, AuthUser_Table
+    "UserTablePrimaryKey": "Id", ///unique Id in AuthUser_Table
+    "UserTableUniqueName": "UniqueName", ///unique username/email in AuthUser_Table
+    "JwtTableName": "TokenStorage", ///This nuget package is going to create a table to store token, TokenStorage_Table
+    "RegisterRoute": "auth/Register", ///This is the route to register new user
+    "LoginRoute": "auth/Login", ///This is the route to login
+    "LogoutRoute": "auth/Logout", ///This is the route to logout
+    "TokenRoute": "auth/GetTokenByRefreshToken", ///This is the route you need to create for fetching Refresh token
+    "UpdatePasswordRoute": "auth/UpdatePassword" ///This is the route to update/edit password
   }
+}
+```
+## Example AuthController
+```c#
+
+[HttpPost]
+[Route("auth/Register")]
+public async Task<IActionResult> Register([FromBody] RegisterModel model)
+{
+    ///NOTE: Your Registration logic
+    return Ok();
+}
+
+[HttpPost]
+[Route("auth/Login")]
+public async Task<IActionResult> Login([FromBody] LoginModel model)
+{
+    if (IsValidLogin())
+    {
+        return Ok();
+    }
+    return Unauthorized();
+}
+
+[Authorize] ///NOTE: We need to use [Authorize]
+[HttpPost]
+[Route("auth/Logout")]
+public async Task<IActionResult> Logout()
+{
+    return Ok();
+}
+
+[Authorize] ///NOTE: We need to use [Authorize]
+[HttpGet]
+[Route("auth/GetTokenByRefreshToken")]
+public async Task<IActionResult> GetTokenByRefreshToken()
+{
+    ///NOTE: Implement your logic if any
+    return Ok();
+}
+
+[Authorize] ///NOTE: We need to use [Authorize]
+[HttpPost]
+[Route("auth/UpdatePassword")]
+public async Task<IActionResult> UpdatePassword([FromBody] LoginModel model)
+{
+    ///NOTE: Implement your logic
+    return Ok();
 }
