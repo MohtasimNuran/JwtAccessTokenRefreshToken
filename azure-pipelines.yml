@@ -1,0 +1,40 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- checkout: self
+  fetchDepth: 0
+
+- script: |
+    echo "Configuring Git..."
+    git config user.email "mohtasimnuran@gmail.com"
+    git config user.name "MohtasimNuran"
+    
+    echo "Adding GitHub remote repository..."
+    git remote add github https://MohtasimNuran:$(GitHubPAT)@github.com/MohtasimNuran/JwtAccessTokenRefreshToken.git
+    
+    echo "Fetching from GitHub to ensure connectivity..."
+    git fetch github
+    
+    echo "Ensuring local master branch is tracking origin/master..."
+    git branch --track master origin/master || true
+    
+    echo "Checking out the master branch..."
+    git checkout master
+    
+    echo "Pushing code to GitHub..."
+    git push github master:master --force
+  displayName: 'Push to GitHub'
+  env:
+    GitHubPAT: $(GitHubPAT) # Ensure GitHubPAT is defined as a secret variable in the pipeline settings
+
+
+
