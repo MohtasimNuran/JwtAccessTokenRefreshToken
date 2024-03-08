@@ -81,5 +81,5 @@ public async Task<IActionResult> UpdatePassword([FromBody] LoginModel model)
 }
 ```
 
-### Full Cycle of JWT Token
+## Full Cycle of JWT Token
 ![alt text](image.png)
