@@ -15,7 +15,6 @@ steps:
     git config user.email "mohtasimnuran@gmail.com"
     git config user.name "MohtasimNuran"
     git remote add github https://MohtasimNuran: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@github.com/JwtAccessTokenRefreshToken.git
-    git add (all other files)
     git commit -m 'reinitialized files'
     git push origin master --force
   displayName: 'Push to GitHub'
