@@ -14,13 +14,20 @@ steps:
   fetchDepth: 0 # Fetches all history for all branches and tags (adjust as needed)
 
 - script: |
+    echo "Configuring Git..."
     git config user.email "mohtasimnuran@gmail.com"
     git config user.name "MohtasimNuran"
     
+    echo "Adding GitHub remote repository..."
     git remote add github https://MohtasimNuran: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@github.com/MohtasimNuran/JwtAccessTokenRefreshToken.git
     
+    echo "Fetching from GitHub to ensure connectivity..."
     git fetch github
     
+    echo "Checking out the branch..."
+    git checkout master # Make sure this is the branch you want to push
+
+    echo "Pushing code to GitHub..."
     git push github master:master --force # Replace 'main:main' with 'sourceBranch:targetBranch' if they differ
   displayName: 'Push to GitHub'
   env:
