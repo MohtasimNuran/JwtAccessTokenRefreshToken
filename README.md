@@ -79,3 +79,7 @@ public async Task<IActionResult> UpdatePassword([FromBody] LoginModel model)
     ///NOTE: Implement your logic
     return Ok();
 }
+```
+
+### Full Cycle of JWT Token
+![alt text](image.png)
