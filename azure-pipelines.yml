@@ -4,14 +4,14 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master # Adjust this to match your Azure Repo's default branch name if different
+- master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
 - checkout: self
-  fetchDepth: 0 # Fetches all history for all branches and tags (adjust as needed)
+  fetchDepth: 0
 
 - script: |
     echo "Configuring Git..."
@@ -24,14 +24,17 @@ steps:
     echo "Fetching from GitHub to ensure connectivity..."
     git fetch github
     
-    echo "Checking out the branch..."
-    git checkout master # Make sure this is the branch you want to push
-
+    echo "Ensuring local master branch is tracking origin/master..."
+    git branch --track master origin/master || true
+    
+    echo "Checking out the master branch..."
+    git checkout master
+    
     echo "Pushing code to GitHub..."
-    git push github master:master --force # Replace 'main:main' with 'sourceBranch:targetBranch' if they differ
+    git push github master:master --force
   displayName: 'Push to GitHub'
   env:
-    GitHubPAT: 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 # Use the secret variable
+    GitHubPAT: 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 # Ensure GitHubPAT is defined as a secret variable in the pipeline settings
 
 
 
