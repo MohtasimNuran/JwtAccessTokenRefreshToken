@@ -19,7 +19,7 @@ steps:
     git config user.name "MohtasimNuran"
     
     echo "Adding GitHub remote repository..."
-    git remote add github https://MohtasimNuran:$(GitHubToken)@github.com/MohtasimNuran/JwtAccessTokenRefreshToken.git
+    git remote add github https://MohtasimNuran:$(GitHubPAT)@github.com/MohtasimNuran/JwtAccessTokenRefreshToken.git
     
     echo "Fetching from GitHub to ensure connectivity..."
     git fetch github
@@ -34,7 +34,7 @@ steps:
     git push github master:master --force
   displayName: 'Push to GitHub'
   env:
-    GitHubPAT: $(GitHubToken) # Ensure GitHubPAT is defined as a secret variable in the pipeline settings
+    GitHubPAT: $(GitHubPAT) # Ensure GitHubPAT is defined as a secret variable in the pipeline settings
 
 
 
